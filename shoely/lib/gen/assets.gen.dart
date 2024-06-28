@@ -12,6 +12,12 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Product.png
+  AssetGenImage get product => const AssetGenImage('assets/images/Product.png');
+
+  /// File path: assets/images/add-circle.svg
+  String get addCircle => 'assets/images/add-circle.svg';
+
   /// File path: assets/images/arrow-left.svg
   String get arrowLeft => 'assets/images/arrow-left.svg';
 
@@ -21,14 +27,38 @@ class $AssetsImagesGen {
   /// File path: assets/images/filter.svg
   String get filter => 'assets/images/filter.svg';
 
+  /// File path: assets/images/img.png
+  AssetGenImage get img => const AssetGenImage('assets/images/img.png');
+
+  /// File path: assets/images/minus-cirlce.svg
+  String get minusCirlce => 'assets/images/minus-cirlce.svg';
+
+  /// File path: assets/images/nike.svg
+  String get nike => 'assets/images/nike.svg';
+
   /// File path: assets/images/shoe1.png
   AssetGenImage get shoe1 => const AssetGenImage('assets/images/shoe1.png');
 
   /// File path: assets/images/star.svg
   String get star => 'assets/images/star.svg';
 
+  /// File path: assets/images/tick-circle.svg
+  String get tickCircle => 'assets/images/tick-circle.svg';
+
   /// List of all assets
-  List<dynamic> get values => [arrowLeft, cart, filter, shoe1, star];
+  List<dynamic> get values => [
+        product,
+        addCircle,
+        arrowLeft,
+        cart,
+        filter,
+        img,
+        minusCirlce,
+        nike,
+        shoe1,
+        star,
+        tickCircle
+      ];
 }
 
 class Assets {
