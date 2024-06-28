@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/arrow-left.svg
+  String get arrowLeft => 'assets/images/arrow-left.svg';
+
   /// File path: assets/images/cart.svg
   String get cart => 'assets/images/cart.svg';
 
@@ -25,7 +28,7 @@ class $AssetsImagesGen {
   String get star => 'assets/images/star.svg';
 
   /// List of all assets
-  List<dynamic> get values => [cart, filter, shoe1, star];
+  List<dynamic> get values => [arrowLeft, cart, filter, shoe1, star];
 }
 
 class Assets {
