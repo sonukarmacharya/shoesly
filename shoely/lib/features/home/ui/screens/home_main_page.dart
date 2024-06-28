@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:priority_soft/features/home/ui/screens/home_display_screen.dart';
@@ -15,25 +16,15 @@ class HomeMainPage extends StatefulWidget {
 class _HomeMainPageState extends State<HomeMainPage>
     with TickerProviderStateMixin {
   TabController? tabController;
-  List<String> tabs = ['All', 'Nike', 'Jordan', 'Adidas', 'Reebok'];
+
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('brand').snapshots();
 
   @override
   void initState() {
     tabController = TabController(length: 5, vsync: this);
-    super.initState();
-  }
 
-  getTabs() {
-    return tabs
-        .map(
-          (e) => Tab(
-            child: Text(
-              e,
-              style: AppTextStyle.heading600,
-            ),
-          ),
-        )
-        .toList();
+    super.initState();
   }
 
   @override
@@ -56,20 +47,39 @@ class _HomeMainPageState extends State<HomeMainPage>
             const SizedBox(
               height: 24,
             ),
-            SizedBox(
-              child: TabBar(
-                  dividerColor: Colors.transparent,
-                  controller: tabController,
-                  isScrollable: true,
-                  indicatorColor: Colors.transparent,
-                  automaticIndicatorColorAdjustment: true,
-                  unselectedLabelColor: AppColors.primary300,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  padding: EdgeInsetsDirectional.zero,
-                  onTap: (value) {},
-                  labelColor: AppColors.primary500,
-                  tabs: getTabs()),
-            ),
+            StreamBuilder(
+                stream: _usersStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    tabController = TabController(
+                        length: snapshot.data!.docs.length, vsync: this);
+                    return SizedBox(
+                      child: TabBar(
+                          dividerColor: Colors.transparent,
+                          controller: tabController,
+                          isScrollable: true,
+                          indicatorColor: Colors.transparent,
+                          automaticIndicatorColorAdjustment: true,
+                          unselectedLabelColor: AppColors.primary300,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          padding: EdgeInsetsDirectional.zero,
+                          onTap: (value) {},
+                          labelColor: AppColors.primary500,
+                          tabs: snapshot.data!.docs
+                              .map(
+                                (e) => Tab(
+                                  child: Text(
+                                    e['Name'],
+                                    style: AppTextStyle.heading600,
+                                  ),
+                                ),
+                              )
+                              .toList()),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                }),
             Expanded(
               child: SingleChildScrollView(
                 child: SizedBox(
