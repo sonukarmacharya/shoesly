@@ -45,6 +45,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/tick-circle.svg
   String get tickCircle => 'assets/images/tick-circle.svg';
 
+  /// File path: assets/images/trash.svg
+  String get trash => 'assets/images/trash.svg';
+
   /// List of all assets
   List<dynamic> get values => [
         product,
@@ -57,7 +60,8 @@ class $AssetsImagesGen {
         nike,
         shoe1,
         star,
-        tickCircle
+        tickCircle,
+        trash
       ];
 }
 
