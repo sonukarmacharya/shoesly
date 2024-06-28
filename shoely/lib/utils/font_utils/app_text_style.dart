@@ -58,7 +58,7 @@ class AppTextStyle {
     fontWeight: FontWeight.w300,
   );
   static const bodyText200 = TextStyle(
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: FontFamily.inter,
     fontWeight: FontWeight.w400,
   );
