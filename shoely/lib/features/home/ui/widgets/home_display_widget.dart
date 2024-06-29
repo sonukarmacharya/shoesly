@@ -1,23 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:priority_soft/features/home/ui/screens/home_detail_screen.dart';
 import 'package:priority_soft/utils/colors/app_colors.dart';
 import 'package:priority_soft/utils/font_utils/app_text_style.dart';
 import 'package:priority_soft/utils/widgets/desc_text_component.dart';
 
 class HomeDisplayWidget extends StatefulWidget {
-  const HomeDisplayWidget({super.key});
+  String productName;
+  String price;
+  String rate;
+  String review;
+  String? id;
+
+  HomeDisplayWidget(
+      {super.key,
+      required this.productName,
+      required this.price,
+      required this.rate,
+      required this.review,
+      required this.id});
 
   @override
   State<HomeDisplayWidget> createState() => _HomeDisplayWidgetState();
 }
 
 class _HomeDisplayWidgetState extends State<HomeDisplayWidget> {
+  Stream<QuerySnapshot>? _productDetailStream;
+
+  @override
+  void initState() {
+    print("widget.id");
+    print(widget.id);
+    //_productDetailStream = DatabaseMethods().getProdductDetails(widget.id!);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const HomeDetailScreen(),
-      )),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -26,12 +46,12 @@ class _HomeDisplayWidgetState extends State<HomeDisplayWidget> {
           const SizedBox(
             height: 10,
           ),
-           DescTextComponent(
-              productName: "Jordan 1 Retro High Tie Dye",
-              productRating: "4.5",
-              productReview: "1045",
+          DescTextComponent(
+              productName: widget.productName,
+              productRating: widget.rate,
+              productReview: widget.review,
               productNameTextWidth: MediaQuery.of(context).size.width * 0.4,
-              productRatingTextWidth:MediaQuery.of(context).size.width * 0.3,
+              productRatingTextWidth: MediaQuery.of(context).size.width * 0.3,
               productNameTextStyle: AppTextStyle.bodyText100.copyWith(
                   color: AppColors.primary500, fontWeight: FontWeight.w300)),
           const SizedBox(
@@ -40,7 +60,7 @@ class _HomeDisplayWidgetState extends State<HomeDisplayWidget> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.4,
             child: Text(
-              "\$235,00",
+              widget.price,
               style:
                   AppTextStyle.heading300.copyWith(fontWeight: FontWeight.w600),
             ),

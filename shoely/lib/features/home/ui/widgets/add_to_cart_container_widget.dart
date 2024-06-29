@@ -16,6 +16,8 @@ class AddToCartContainerWidget extends StatefulWidget {
 }
 
 class _AddToCartContainerWidgetState extends State<AddToCartContainerWidget> {
+  final TextEditingController _quantityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,6 +48,8 @@ class _AddToCartContainerWidgetState extends State<AddToCartContainerWidget> {
             height: 10,
           ),
           TextFormField(
+              controller: _quantityController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: "Enter Quantity",
                   hintText: "Enter Quantity",
@@ -60,8 +64,27 @@ class _AddToCartContainerWidgetState extends State<AddToCartContainerWidget> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          SvgPicture.asset(Assets.images.minusCirlce),
-                          SvgPicture.asset(Assets.images.addCircle),
+                          GestureDetector(
+                              onTap: () {
+                                int value = int.parse(_quantityController.text);
+                                if (value > 0) {
+                                  setState(() {
+                                    _quantityController.text =
+                                        (value - 1).toString();
+                                  });
+                                }
+                              },
+                              child:
+                                  SvgPicture.asset(Assets.images.minusCirlce)),
+                          GestureDetector(
+                              onTap: () {
+                                int value = int.parse(_quantityController.text);
+                                setState(() {
+                                  _quantityController.text =
+                                      (value + 1).toString();
+                                });
+                              },
+                              child: SvgPicture.asset(Assets.images.addCircle)),
                         ],
                       ),
                     ),

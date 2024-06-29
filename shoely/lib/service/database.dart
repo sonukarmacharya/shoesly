@@ -1,15 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
-  Future<void> insertData(String name, String email, String password) async {
-    // TODO: implement insertData
+  Stream<QuerySnapshot> getBrands() {
+    return FirebaseFirestore.instance.collection('brands').snapshots();
   }
 
-  Future<Stream<QuerySnapshot>> getBrands() async {
-    return FirebaseFirestore.instance.collection('brand').snapshots();
+  Stream<QuerySnapshot> getAllProdducts() {
+    return FirebaseFirestore.instance.collection('products').snapshots();
   }
 
-  Future<void> deleteData(String name, String email, String password) async {
-    // TODO: implement deleteData
+  Stream<QuerySnapshot> getAllProdductsByBrand(String brandName) {
+    return FirebaseFirestore.instance
+        .collection('products')
+        .where("b_id", isEqualTo: brandName)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getProdductDetails(String id) {
+    return FirebaseFirestore.instance
+        .collection('products')
+        .where("b_id", isEqualTo: id)
+        .snapshots();
   }
 }
