@@ -13,11 +13,10 @@ class HomeDisplayScreen extends StatefulWidget {
 }
 
 class _HomeDisplayScreenState extends State<HomeDisplayScreen> {
-  Stream<QuerySnapshot>? _productStream;
+  Stream<QuerySnapshot>? _productStream = DatabaseMethods().getAllProdducts();
 
   @override
   void initState() {
-    _productStream = DatabaseMethods().getAllProdducts();
     _updateProductStream(widget.selestedBrandName);
     super.initState();
   }
